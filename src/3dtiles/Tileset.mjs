@@ -24,7 +24,8 @@ class Tileset {
       root: {
         refine: 'ADD',
         boundingVolume: {
-          region: this.b3dm.getRegion()
+          region: this.b3dm.getRegion(),
+          box: this.b3dm.getBox()
         },
         geometricError: 0.0,
         content: {

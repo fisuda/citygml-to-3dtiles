@@ -13,7 +13,11 @@ caporal
   })
   .argument('<output-3dtiles>', 'Output folder where to create 3D-Tiles')
   .action(async function (args, options, logger) {
-    let converter = new Converter()
+    let converter = new Converter({
+      srsProjections: {
+        'http://www.opengis.net/def/crs/EPSG/0/6697': '+proj=longlat +ellps=GRS80 +no_defs'
+      }
+  })
     logger.info('Converting...')
     await converter.convertFiles(args['inputCitygml'], args['output3Dtiles'])
     logger.info('Done.')

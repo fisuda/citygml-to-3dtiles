@@ -45,6 +45,9 @@ class SRSTranslator {
     if (typeof height !== 'undefined') {
       coords[2] = height
     }
+    let t = coords[0]
+    coords[0] = coords[1]
+    coords[1] = t
     return coords
   }
 

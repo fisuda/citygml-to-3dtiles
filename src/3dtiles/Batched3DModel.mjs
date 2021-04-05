@@ -31,6 +31,35 @@ class Batched3DModel {
   /**
    * @returns {Number[]}
    */
+  getBox () {
+    let points = this.boundingBox.getPoints()
+    let zz = [points[0].z, points[1].z]
+    let z = Math.max(...zz) - Math.min(...zz)
+    points = this.boundingBox.getPoints().map(point => {
+      return Cesium.Cartographic.fromCartesian(point)
+    })
+    let xx = [points[0].longitude, points[1].longitude]
+    let yy = [points[0].latitude, points[1].latitude]
+    let x = Math.max(...xx) - Math.min(...xx)
+    let y = Math.max(...yy) - Math.min(...yy)
+    return [
+      Math.min(...xx)+x/2,
+      Math.min(...yy)+y/2,
+      0.0,
+      x/2,
+      0.0,
+      0.0,
+      0.0,
+      y/2,
+      0.0,
+      0.0,
+      0.0,
+      z/2
+    ]
+  }
+  /**
+   * @returns {Number[]}
+   */
   getRegion () {
     let points = this.boundingBox.getPoints().map(point => {
       return Cesium.Cartographic.fromCartesian(point)
